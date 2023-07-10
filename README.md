@@ -93,3 +93,36 @@ The solution here is to use the storage class **extern**.
 Internal linking is the opposite of the external, here we want to make a variable private to a certain file using the keyword **static**.
 
 
+## Linux Libraries : 
+Generally speaking, The code we write will be used several times which led us to introduce the concept of a library which will enable reusing our code as much as we need.
+
+Mainly there is two types of libraries : 
+
+### Static Libraries :
+
+The linker here makes a copy of all library functions to the .exe file.
+
+#### Creating the library
+To create a static library in C we first need to compile the source code of all the files that we will have in this library
+For instance : I have add.c and sub.c : 
+`gcc -c add.c -o add.o`
+`gcc -c sub.c -o sub.o`
+finally : 
+`ar rcs calc.a add.o sub.o`
+Here `ar` stands for **archive** and `rcs` stands for **replace and create** static libray.
+
+#### Data Linking : 
+First, We create the object file of main 
+`gcc -c main.c -o main.o`
+Now we will **link** the main program with the static library : 
+`gcc main.c -L. -calc -o main`
+
+==> As a Final result Static Linking **combines** your work with the library into **one binary code**.
+
+### Dynamic Library
+
+Every program can access this library at runtime avoiding the creation of multiple copies for every program.
+
+
+
+
