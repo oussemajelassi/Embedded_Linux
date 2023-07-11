@@ -122,18 +122,37 @@ Now we will **link** the main program with the static library :
 ### Dynamic Library
 
 Every program can access this library at runtime avoiding the creation of multiple copies for every program.
+When using dynamic Library we are attacking the biggest of our fears which is the loss of memory.
+Doing so makes possible for different program to use the same library without actually having them, IN other terms we will not have one big binary code executed that have both the application program and the library code.
+Folowing these steps I managed to Create my own 'hello world" example of a shared library.
+
+#### Compiling with Position Independent Code : 
+
+`gcc -c -Wall -Werror -fpic geometry.c`
+this will create the .o file : ![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/a1ab4100-4455-4985-929d-9cc4dca1d837)
+
+#### Creating the shared library file : 
+
+We will use the object file created to create th .so file wich is the shared library : 
+`gcc -shared -o libgeometry.so geometry.o`
+![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/89bd33fb-d545-4fc1-b715-447940d6e1e2)
+
+#### Compile Main Program : 
+
+Now we have to compile Main, We have to tell the compiler where to find our library and so : 
+`gcc -L/home/flooki/Desktop/Embedded_Linux/Shared_Library_Manipulation/My_Library -Wall -o program main.c -lgeometry`
+
+#### Making our Library ready for use to any program :
+
+Next step is To make our library ready for use.
+Typically the Loader have a default location for all libraries, since our new masterpiece is created away from this default place we either have to put it there or we have to export its path so it become recognizable.
+
+1 : `sudo cp libgeometry.so /usr/lib`
+
+2 : `export LD_LIBRARY_PATH=:/home/flooki/Desktop/Embedded_Linux/Shared_Library_Manipulation/My_Library`
 
 
-
-
-
-## The Boot process in linux : 
-
-The minute we plug in a linux device, An entire process is started in order to reach that famous log in prompt. This process is called the boot process and it consists of six major steps : 
-
-### BIOS :
-
-BIOS Stands 
+==> ![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/7fc993a0-6ac7-41b4-b29d-90299718b1d5)
 
 
 
