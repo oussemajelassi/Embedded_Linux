@@ -69,7 +69,7 @@ We can also talk about two major concepts :
 Let's take a look at this example where we hve two files : 
 
 
-```
+```C
 // add.c
 int amount = 0 ;
 int main ()
@@ -79,7 +79,7 @@ return 0 ;
 }
 ```
 
-```
+```C
 // sub.c
 void sub()
 {
@@ -156,4 +156,35 @@ Typically the Loader have a default location for all libraries, since our new ma
 
 
 
+## Makefile :
+
+A MakeFile is a file that will **automate** the compilation process.
+For instance, If you have a library with many source code files we will have to go by all the commands for every file in order to finally get everything ready to execute. Make File will automate all this process.
+One other utility is that when we **change one file** the makefile will not recreate all the object files but **only the changed** one which is far more rapid.
+
+```Makefile
+geometry.o : geometry.c
+```
+This syntax means that I want to **create** a .o file which is the compiled file and so I **need** the geometry.c file.
+
+==> Its a dependency !
+```Makefile
+geometry.o : geometry.c
+  `gcc -o geometry.o -c main.c`
+```
+Next we put the command that will generate geometry.o.
+Note that we can put any other command such as echo or anything else.
+
+```Makefile
+program : main.o geometry.o
+  gcc -o program main.i geometry.o
+main.o : main.c
+  `gcc -o main.o -c main.c`
+geometry.o : geometry.c
+  `gcc -o geometry.o -c geometry.c`
+```
+Now We are adding the final result which is program.
+
+All that compiling process is now reduced to one command : 
+`make` : ![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/c3fff869-ce1d-4a3e-a530-b7d8dc01540d)
 
