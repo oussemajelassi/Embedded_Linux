@@ -126,3 +126,15 @@ Every program can access this library at runtime avoiding the creation of multip
 
 
 
+
+## The Boot process in linux : 
+
+The minute we plug in a linux device, An entire process is started in order to reach that famous log in prompt. This process is called the boot process and it consists of six major steps : 
+
+### BIOS :
+
+BIOS Stands 
+
+
+
+
