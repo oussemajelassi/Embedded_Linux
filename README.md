@@ -177,7 +177,7 @@ Note that we can put any other command such as echo or anything else.
 
 ```Makefile
 program : main.o geometry.o
-  gcc -o program main.i geometry.o
+  gcc -o program main.o geometry.o
 main.o : main.c
   `gcc -o main.o -c main.c`
 geometry.o : geometry.c
