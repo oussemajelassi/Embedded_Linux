@@ -188,3 +188,19 @@ Now We are adding the final result which is program.
 All that compiling process is now reduced to one command : 
 `make` : ![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/c3fff869-ce1d-4a3e-a530-b7d8dc01540d)
 
+## Linux Drivers : 
+
+Linux drivers are a piece of code that handles everything related to a hardware.
+Their main job is to abstract to us as users dealing with hardware.
+The Relationship between User space and Kernel space is maintained only by **System calls**.
+
+### Kernel Modules : 
+
+First we should note that a Kernel module may not be a device driver att all.
+As a Kernel module is a piece of compiled code that can be plugged in when needed and at runtime.
+Modifying this module doesnot require us to reboot neither rebuild all the kernel.
+
+==> Most of the drivers are built as kernel modules ! 
+
+
+
