@@ -202,5 +202,35 @@ Modifying this module doesnot require us to reboot neither rebuild all the kerne
 
 ==> Most of the drivers are built as kernel modules ! 
 
+### Compiling the Modules : 
+
+As already mentionned, Makefiles are a big help when talking about compiling however we need to pay attention when dealing with modules since it have a specefic syntax : 
+```Makefile
+obj-m += My_Module.o
+
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+clean:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+```
+### Modules in action :
+
+Next we will plug in our module.
+We will be interested in the ".ko" file which stands for kernel object.
+
+==> ``sudo insmod My_Module.ko ``
+
+### keeping track of the module output :
+
+Our module is very simple it prints some words on the kernel log buffer.
+to look if it is added to all kernel modules : ``lsmod`` : 
+![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/e866421a-0755-4417-8684-fd844f324080)
+
+or we can use : ``dmesg`` : 
+![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/eb162001-4449-4e43-924d-ba14c91f3678)
+
+
+
 
 
