@@ -1,0 +1,11 @@
+CC:= gcc
+SRCS := $(wildcard *.c)
+EXECTUABLE :=$(SRCS:.c=.o)
+INC_DIR = /usr/src/linux-headers-5.4.0-153/include
+all:$(EXECTUABLE)
+$(EXECTUABLE) : $(SRCS)
+	$(CC) -o $@ -I$(INC_DIR) $< # "$< " is an automatic variable refering to object files
+#%.o : %.c
+#	$(CC) -c/lib/modules/$(shell uname -r)/build M=$(PWD) -I$(INC_DIR) $<
+clean :
+	rm -rf $(EXECTUABLE)

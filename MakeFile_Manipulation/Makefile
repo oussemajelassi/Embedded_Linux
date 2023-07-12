@@ -1,3 +1,5 @@
+all : program
+
 program : main.o geometry.o
 	gcc -o program main.o geometry.o
 main.o : main.c
@@ -6,3 +8,9 @@ main.o : main.c
 
 geometry.o : geometry.c
 	gcc -o geometry.o -c geometry.c
+
+clean :
+	rm -rf *.o
+
+mrproper : clean
+	rm -rf program

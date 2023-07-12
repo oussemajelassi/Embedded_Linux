@@ -1,0 +1,1 @@
+cmd_/home/flooki/Desktop/Embedded_Linux/Kernel_Modules/My_Module.mod := { echo  /home/flooki/Desktop/Embedded_Linux/Kernel_Modules/My_Module.o;  echo; } > /home/flooki/Desktop/Embedded_Linux/Kernel_Modules/My_Module.mod
