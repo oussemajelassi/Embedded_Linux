@@ -247,6 +247,20 @@ A layer in Yocto is a set of recipes. In fact Yocto gathers all the similar reci
 
 Meta data is where all the configurations happens, FOr insatance we can find that bblayer.conf have the configuration for priorities regarding all the layers.
 
+### Bitbake : 
+
+Bitbake is where all tha magic happens, It is similar to a very big make, It organize tasks, sorts them and then verify if its necessary to run them or not.
+Its is based on very big database from which it gets all he needs to build images.
+
+### Generating images : 
+
+Yocto will need some configs in order to generate a compatible linux image for your board.
+This info will be inserted in hte variable **MACHINE**.
+
+![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/4acdf773-c603-4182-9005-23f82c0fa7ce)
+
+This list can be found in local.conf and it describes the list of possible target machines.
+Luckily I will be working on a **beaglebone** but I will keep looking ofr how to create images on a raspberry pi for example and any other not listed board here.
 
 
 
