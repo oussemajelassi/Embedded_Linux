@@ -263,6 +263,19 @@ This list can be found in local.conf and it describes the list of possible targe
 Luckily I will be working on a **beaglebone** but I will keep looking ofr how to create images on a raspberry pi for example and any other not listed board here.
 
 
+### Affecting static IP Adress the the target board : 
+
+Many times we want to connect via ssh to our target machine so we want to give it static IP Adress since its creation :
+
+We want to make changes to ``/etc/network/interfaces``.
+We will First figure which recipe is responsible for generating this file.
+
+#### How to find and modify a Recipe : 
+
+When we want to modify a file we first look to the corresponding recipe a
+
+
+
 
 
 
