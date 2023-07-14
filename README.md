@@ -230,6 +230,25 @@ to look if it is added to all kernel modules : ``lsmod`` :
 or we can use : ``dmesg`` : 
 ![image](https://github.com/oussemajelassi/Embedded_Linux/assets/100140668/eb162001-4449-4e43-924d-ba14c91f3678)
 
+## YOCTO : 
+
+Yocto is a build system used to generate binary linux images for our embedded systems.
+Before tackling YOcto one must be aware of the used terminology : 
+
+### Recipe : 
+
+A recipe is the tool for yocto to aquire tha packages. A recipe have all the informations for a package such as where to find it and from where to download it.
+
+### Layer : 
+
+A layer in Yocto is a set of recipes. In fact Yocto gathers all the similar recipees in one layer creating for example the **Networking layer**.
+
+### Meta-Data : 
+
+Meta data is where all the configurations happens, FOr insatance we can find that bblayer.conf have the configuration for priorities regarding all the layers.
+
+
+
 
 
 
