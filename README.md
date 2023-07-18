@@ -289,9 +289,26 @@ BitBake now knows every recipe from the variable BBFILES, For every recipe Bitba
 
 We want sometimes to change an existing variable so basic syntax is : 
 
-* **Default Value** : `` FLooki ?= "Yocto" ``, This commands sets the variable Flooki to yocto **IF** it is undefined elsewhere.
-* 
+* **Default Value** : `` FLooki ?= "Yocto" ``, This command is immediate and it sets the variable Flooki to yocto **IF** it is undefined elsewhere.
+* **Weak default value** : `` FLooki ??= "Yocto"``, This command is not immediate, IT will wait to the end and then will sets Flooki to yocto if Flooki is not defined elsewhere
 
+```config
+A ?= "1"
+B ?= "2"
+B ?= "3"
+```
+This way B will contain 2. because '?=' is immediate.
+
+```config
+A ??= "1"
+B ??= "2"
+B ??= "3"
+```
+This way B will contain 3.
+
+* **Immediate Variable expansion** :
+`` Flooki := 123 ``
+````  
 
 ### Generating images : 
 
