@@ -329,6 +329,36 @@ VAR1_windows ="Windows"
 Here VAR1 will eventually have linux.
 
 
+#### Adding Layers and Recipes
+
+First, Create a directory ``mkdir -p My_Layer/conf``.
+Now we need the layer.conf file : ``touch layer.conf``.
+
+```config
+BBPATH .= ":${LAYERDIR}"
+BBFILES += "${LAYERDIR}/*.bb"
+
+BBFILE_COLLECTIONS += "mylayer"
+BBFILE_PATTERN_mylayer := "^${LAYERDIR}/"
+```
+
+now inside /My_layer/first.bb : 
+```C
+DESCRIPTION = "Prints Hello World"
+PN = 'printhello'
+PV = '1'
+do_build[nostamp] = '1'
+python do_build() {
+   bb.plain("********************");
+   bb.plain("*                  *");
+   bb.plain("*  Hello, World!   *");
+   bb.plain("*                  *");
+   bb.plain("********************");
+}
+```
+
+
+
 ### Generating images : 
 
 Yocto will need some configs in order to generate a compatible linux image for your board.
