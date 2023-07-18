@@ -2,7 +2,7 @@
 This will have all my work and progress while learning from scratch Embedded Linux 
 Starting the journey there will be a few concepts one should be aware of before starting the actual develeopment : 
 
-**Refernces** : 
+**References** : 
 * https://www.blaess.fr/christophe/yocto-lab/index.html
 * https://linuxembedded.fr/2015/12/yocto-comprendre-bitbake
 * https://docs.yoctoproject.org/bitbake/2.4/index.html
@@ -307,8 +307,27 @@ B ??= "3"
 This way B will contain 3.
 
 * **Immediate Variable expansion** :
-`` Flooki := 123 ``
-````  
+```config
+tmp = 123
+Flooki := ${tmp}
+Oussema = ${tmp}
+tmp = 456
+```
+Here Flooki will end up to 123, but oussela will be 456.
+
+* **Appending '+=' and prepending '=+' with spaces** ( Immediate ) : Flooki += ' oussema '
+* **Appending '.=' and prepending '=.' without spaces** ( Immediate ) : Flooki .= ' oussema '
+* **Appending and Prepending (Override Style Syntax)** ( Not Immediate ) : Flooki:append = "oussema"
+
+* **OVERRIDES** : It is a mechanism that will let you change the variables depending on its suffix enabling the possibility of conditionnal meta-data writing.
+```Config
+OVERRIDES = "linux:arm:flooki"
+VAR1 = "default"
+VAR1_linux = "linux"
+VAR1_windows ="Windows"
+```
+Here VAR1 will eventually have linux.
+
 
 ### Generating images : 
 
