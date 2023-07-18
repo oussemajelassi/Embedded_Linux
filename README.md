@@ -1,10 +1,12 @@
 # Embedded_Linux
 This will have all my work and progress while learning from scratch Embedded Linux 
 Starting the journey there will be a few concepts one should be aware of before starting the actual develeopment : 
+
 **Refernces** : 
 * https://www.blaess.fr/christophe/yocto-lab/index.html
 * https://linuxembedded.fr/2015/12/yocto-comprendre-bitbake
 * https://docs.yoctoproject.org/bitbake/2.4/index.html
+* https://wiki.st.com/stm32mpu/wiki/BitBake_cheat_sheet
 ## The build/compilation process : 
 
 This will describe the major steps that any **C code** runs to before being finally executed. 
@@ -277,6 +279,18 @@ Bitbake in this order will :
 
 #### Load Recipes : 
 
+BitBake now knows every recipe from the variable BBFILES, For every recipe Bitbake will : 
+
+* Load **.bb** files
+* Load **.bbappend** files as mentionned in BBFILES
+* Bitbake now knows the tasks to be done, It checks if the task should be executed otherwise It will restore results from a previous build.
+
+#### Config Files : Syntax :
+
+We want sometimes to change an existing variable so basic syntax is : 
+
+* **Default Value** : `` FLooki ?= "Yocto" ``, This commands sets the variable Flooki to yocto **IF** it is undefined elsewhere.
+* 
 
 
 ### Generating images : 
