@@ -251,6 +251,27 @@ Meta data is where all the configurations happens, FOr insatance we can find tha
 
 Bitbake is where all tha magic happens, It is similar to a very big make, It organize tasks, sorts them and then verify if its necessary to run them or not.
 Its is based on very big database from which it gets all he needs to build images.
+In some bullet points **BitBake** will : 
+* Make necessary configurations
+* Fetching source code.
+* Avoid Re-executing non necessary tasks
+
+Suppose We went by : ``bitbake wayland -c compile`` : 
+Bitbake in this order will : 
+
+#### Read Meta-data : 
+
+* First  : Bitbake will look for **bblayers.conf**, BBLAYERS is variable having a list of layers, BitBake will use this variable to load other files.
+* Second : Every layer is a directory having a file **layer.conf** under a subdirectory nammed conf. Everything we know about a layer is due to this file. this file enables that every layer can modify and add Variables (1).
+* Third  : Now we will configure Bitbake itself by looking into **bitbake.conf**.
+
+Till Now, All we saw is configuration files however 
+
+
+  
+(1) : There are many variables that layers can modify  
+* BBPATH  : It has ':' seperated path that bitbake will use to find **.conf** and **.bbclass** files.
+* BBFILES : It point on **.bb** and **.bbappend** files and so It guides Bitbake towards recipes.
 
 ### Generating images : 
 
