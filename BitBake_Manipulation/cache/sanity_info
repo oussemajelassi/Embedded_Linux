@@ -1,0 +1,4 @@
+SANITY_VERSION 1
+TMPDIR /home/flooki/Desktop/Embedded_Linux/BitBake_Manipulation/tmp
+SSTATE_DIR /home/flooki/Desktop/Embedded_Linux/BitBake_Manipulation/sstate-cache
+NATIVELSBSTRING ubuntu-20.04
