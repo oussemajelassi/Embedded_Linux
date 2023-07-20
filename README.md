@@ -390,6 +390,23 @@ Our case we want to change /dev/network/interface of our target.
 
 the command is `` devtool search /etc/network/interfaces``
 
+### Customize the configurations : 
+
+To customize every aspect of the build we will be using **local.conf** File, To do so we will be manipulating some variables.
+
+**MACHINE** to indicate your target, **DL_DIR** and **SSTATE_DIR** to show where to put downloads and stock temporary files.
+If your machine is not powerful or you want to work while building we can use **BB_NUMBER_THREADS** to control yocto's access to CPU.
+
+#### Adding Users and passwords : 
+
+We start by telling yocto that we are using a class called extrausers : 
+
+```C
+//local.conf
+INHERIT+="extrausers"
+EXTRA_USERS_PARAMS += "useradd  -P welcome  guest;"
+```
+
 
 
 
