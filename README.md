@@ -331,8 +331,8 @@ Here VAR1 will eventually have linux.
 
 #### Adding Layers and Recipes
 
-First, Create a directory ``mkdir -p My_Layer/conf``.
-Now we need the layer.conf file : ``touch layer.conf``.
+* First, Create a directory ``mkdir -p My_Layer/conf``.
+* Now we need the layer.conf file : ``touch layer.conf``.
 
 ```config
 BBPATH .= ":${LAYERDIR}"
@@ -342,7 +342,7 @@ BBFILE_COLLECTIONS += "mylayer"
 BBFILE_PATTERN_mylayer := "^${LAYERDIR}/"
 ```
 
-now inside /My_layer/first.bb : 
+* now inside /My_layer/first.bb : 
 ```C
 DESCRIPTION = "Prints Hello World"
 PN = 'printhello'
@@ -356,8 +356,9 @@ python do_build() {
    bb.plain("********************");
 }
 ```
+* Last thing is to tell Bitbake where to find the layer : ``echo "BBLAYERS ?= \"/home/Desktop/Embedded_Linux/BitBake_Manipulation/My_Layer\" " > /home/flooki/Desktop/Embedded_Linux/BitBake_Manipulation/My_Layer/conf/bblayers.conf``
 
-
+==> B
 
 ### Generating images : 
 
