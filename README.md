@@ -407,6 +407,15 @@ INHERIT+="extrausers"
 EXTRA_USERS_PARAMS += "useradd  -P welcome  guest;"
 ```
 
+#### Adding layers to our build : 
+
+We know that poky provides us with a variety of layers ready to use, we can find them in `poky/meta`.
+However,We sometimes need something else. nano for example is not available se we need to get it from elsewhere.
+
+We will now take a look at **https://layers.openembedded.org/layerindex/branch/master/layers/**. And then download **meta-openembedded** which have the layer **meta-oe** which contains nano.
+
+Next we add the layer to the list of known layers : 
+``bitbake-layers add-layer ../meta-openembedded/meta-oe/``
 
 
 
