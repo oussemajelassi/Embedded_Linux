@@ -1,0 +1,10 @@
+SUMMARY = "A customized image for development purposes."
+LICENSE = "MIT"
+inherit core-image
+IMAGE_FEATURES += "splash"
+IMAGE_FEATURES += "tools-debug"
+IMAGE_FEATURES += "tools-profile"
+IMAGE_FEATURES += "tools-sdk"
+IMAGE_FEATURES += "ssh-server-dropbear"
+IMAGE_INSTALL_append = " mc"
+IMAGE_INSTALL_append = " nano"
