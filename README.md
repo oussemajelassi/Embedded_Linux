@@ -451,7 +451,9 @@ In order to have our application directly installed to our target board, We will
 
 We should note that we are **CROSS-Compiling** here, meaning that we running the toolchain on our PC but the binary code will be executed on another CPU.
 
-
-
+We can ask bitbake to do that with ``bitbake -c populate_sdk Flooka-image``.
+We get an sdk/.sh file. It have what we want.
+Executing that shell file generates another file.
+Whenever we need to use the sdk we should **source** the generated file.
 
 
