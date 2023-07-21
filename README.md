@@ -456,4 +456,8 @@ We get an sdk/.sh file. It have what we want.
 Executing that shell file generates another file.
 Whenever we need to use the sdk we should **source** the generated file.
 
+#### Creating the recipe : 
+
+
+
 
