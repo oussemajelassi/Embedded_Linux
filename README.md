@@ -417,7 +417,39 @@ We will now take a look at **https://layers.openembedded.org/layerindex/branch/m
 Next we add the layer to the list of known layers : 
 ``bitbake-layers add-layer ../meta-openembedded/meta-oe/``
 
+And we add ``IMAGE_INSTALL:append = " nano"``, to our local.conf.
 
+### Specefic Image : 
+
+We start by creatin our own layer : 
+``bitbake-layers create-layer ../Flooki_Layer``
+and then add it to the list recognized by bitbake
+``bitbake-layers add-layer ../FLooki_Layer``
+
+Now we create our recipe that will descrive the image and we basing it on core-base-image.
+``mkdir -p /Flooki_Layer/recipes-Flooka/images``
+we next edit Flooka-image.bb to meet our needs : 
+```bitbake
+SUMMARY = "A customized image for development purposes."
+LICENSE = "MIT"
+inherit core-image
+IMAGE_FEATURES += "splash"
+IMAGE_FEATURES += "tools-debug"
+IMAGE_FEATURES += "tools-profile"
+IMAGE_FEATURES += "tools-sdk"
+IMAGE_FEATURES += "ssh-server-dropbear"
+IMAGE_INSTALL_append = " mc"
+IMAGE_INSTALL_append = " nano"
+```
+
+
+### Creating an application : 
+
+In order to have our application directly installed to our target board, We will extract the compilation toolchain, Compile our application and then inject the executable to our image.
+
+#### Extract the Toolchain : 
+
+We should note that we are **CROSS-Compiling** here, meaning that we running the toolchain on our PC but the binary code will be executed on another CPU.
 
 
 
