@@ -390,8 +390,66 @@ Our case we want to change /dev/network/interface of our target.
 
 the command is `` devtool search /etc/network/interfaces``
 
+### Customize the configurations : 
+
+To customize every aspect of the build we will be using **local.conf** File, To do so we will be manipulating some variables.
+
+**MACHINE** to indicate your target, **DL_DIR** and **SSTATE_DIR** to show where to put downloads and stock temporary files.
+If your machine is not powerful or you want to work while building we can use **BB_NUMBER_THREADS** to control yocto's access to CPU.
+
+#### Adding Users and passwords : 
+
+We start by telling yocto that we are using a class called extrausers : 
+
+```C
+//local.conf
+INHERIT+="extrausers"
+EXTRA_USERS_PARAMS += "useradd  -P welcome  guest;"
+```
+
+#### Adding layers to our build : 
+
+We know that poky provides us with a variety of layers ready to use, we can find them in `poky/meta`.
+However,We sometimes need something else. nano for example is not available se we need to get it from elsewhere.
+
+We will now take a look at **https://layers.openembedded.org/layerindex/branch/master/layers/**. And then download **meta-openembedded** which have the layer **meta-oe** which contains nano.
+
+Next we add the layer to the list of known layers : 
+``bitbake-layers add-layer ../meta-openembedded/meta-oe/``
+
+And we add ``IMAGE_INSTALL:append = " nano"``, to our local.conf.
+
+### Specefic Image : 
+
+We start by creatin our own layer : 
+``bitbake-layers create-layer ../Flooki_Layer``
+and then add it to the list recognized by bitbake
+``bitbake-layers add-layer ../FLooki_Layer``
+
+Now we create our recipe that will descrive the image and we basing it on core-base-image.
+``mkdir -p /Flooki_Layer/recipes-Flooka/images``
+we next edit Flooka-image.bb to meet our needs : 
+```bitbake
+SUMMARY = "A customized image for development purposes."
+LICENSE = "MIT"
+inherit core-image
+IMAGE_FEATURES += "splash"
+IMAGE_FEATURES += "tools-debug"
+IMAGE_FEATURES += "tools-profile"
+IMAGE_FEATURES += "tools-sdk"
+IMAGE_FEATURES += "ssh-server-dropbear"
+IMAGE_INSTALL_append = " mc"
+IMAGE_INSTALL_append = " nano"
+```
 
 
+### Creating an application : 
+
+In order to have our application directly installed to our target board, We will extract the compilation toolchain, Compile our application and then inject the executable to our image.
+
+#### Extract the Toolchain : 
+
+We should note that we are **CROSS-Compiling** here, meaning that we running the toolchain on our PC but the binary code will be executed on another CPU.
 
 
 
