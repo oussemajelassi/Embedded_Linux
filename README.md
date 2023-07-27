@@ -474,7 +474,8 @@ do_compile(){
 do_install () {
 install -d ${D}${bindir}
 install -m 0755 application ${D}${bindir}
-}```
+}
+```
 
 we finally end by adding ``IMAGE_INSTALL += "application" in our image file.``
 ### Customize Hardware Support : 
