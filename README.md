@@ -468,7 +468,7 @@ SRC_URI = "file://src"
 S = "${WORKDIR}/src"
 TARGET_CC_ARCH += "${LDFLAGS}"
 do_compile(){
-${CC} -o application application.c
+**${CC} ${CFLAGS} ${LDFLAGS} application.c -o application -I/${RECIPE_SYSROOT}/${includedir}/modbus/ -lmodbus**
 }
 
 do_install () {
