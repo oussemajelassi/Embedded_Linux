@@ -482,5 +482,9 @@ we finally end by adding ``IMAGE_INSTALL += "application" in our image file.``
 
 This step is all about describing the hardware components that we are using in our project, such as sensors or screens.
 To do so we need to : **Add the adequate driver**, and **configure the device tree**.
+In order to get modbus working and my sensor interfaced i should enable both **Serial** and **I2C** in my build.
 
+and So we will the **device tree**
+
+All these configs are made through `` bitbake -c menuconfig <recipe-name>``.
 
