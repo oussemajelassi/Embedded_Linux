@@ -456,8 +456,30 @@ We get an sdk/.sh file. It have what we want.
 Executing that shell file generates another file.
 Whenever we need to use the sdk we should **source** the generated file.
 
-#### Creating the recipe : 
+#### Make a recipe out of your application : 
+The other **Recommended** way is to put the application in a a recipe and so we proceed by creating our layer.
+our recipe file will look like : 
+```bitbake
+SUMMARY = " hello world custom application "
+DESCRIPTION = " Custom Recipe "
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+SRC_URI = "file://src"
+S = "${WORKDIR}/src"
+TARGET_CC_ARCH += "${LDFLAGS}"
+do_compile(){
+${CC} -o application application.c
+}
 
+do_install () {
+install -d ${D}${bindir}
+install -m 0755 application ${D}${bindir}
+}```
 
+we finally end by adding ``IMAGE_INSTALL += "application" in our image file.``
+### Customize Hardware Support : 
+
+This step is all about describing the hardware components that we are using in our project, such as sensors or screens.
+To do so we need to : **Add the adequate driver**, and **configure the device tree**.
 
 
