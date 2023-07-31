@@ -7,6 +7,9 @@ Starting the journey there will be a few concepts one should be aware of before 
 * https://linuxembedded.fr/2015/12/yocto-comprendre-bitbake
 * https://docs.yoctoproject.org/bitbake/2.4/index.html
 * https://wiki.st.com/stm32mpu/wiki/BitBake_cheat_sheet
+* https://www.youtube.com/watch?v=9vsu67uMcko&list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB
+
+  
 ## The build/compilation process : 
 
 This will describe the major steps that any **C code** runs to before being finally executed. 
@@ -482,9 +485,17 @@ we finally end by adding ``IMAGE_INSTALL += "application" in our image file.``
 
 This step is all about describing the hardware components that we are using in our project, such as sensors or screens.
 To do so we need to : **Add the adequate driver**, and **configure the device tree**.
-In order to get modbus working and my sensor interfaced i should enable both **Serial** and **I2C** in my build.
+In order to get modbus working and my sensor interfaced i should enable ~~both **Serial** and **I2C**~~. **I2C** in my build.
 
-and So we will the **device tree**
+and So we will look up to the **device tree**.
+the device tree is configured in a .dts file that can be found in `tmp/work-shared/beaglebone/kernel-source/arch/arm/boot/dts`
+Yocto is not okay with us modifying this file however we need to either create our own .dts file or create a **patch** that updates this file.
+I am following a tutorial where he will make a patch so i will follow him.
+going into `am335x-bone-common.dtsi`, I found two **&i2c** blocks, The status in each one of them show the word **okay** which means enabled.
+If we go through beaglebone documentation we will find that the beagle bone has only two i2c ports which are already enabled when using the core-base-image, So we have nothing big to do.
+
+The file itself is not much of informations since it has many includes : my case for example it include ``am335x-bone-common.dtsi`` which describes for example the already used i2c ports.
+
 
 All these configs are made through `` bitbake -c menuconfig <recipe-name>``.
 
