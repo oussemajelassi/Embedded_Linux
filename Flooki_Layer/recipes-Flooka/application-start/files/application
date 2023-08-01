@@ -1,0 +1,31 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:             application
+# Required-Start:       
+# Required-Stop:
+# Default-Start:        2 3 4 5
+# Default-Stop:         1
+# Short-Description:    Modbus slave application Daemon
+### END INIT INFO
+#
+
+do_start()
+{
+	start-stop-daemon --start --exec application
+}
+
+
+do_stop()
+{
+	start-stop-daemon --stop --name application
+}
+
+
+case "$1" in
+  start) do_start ;;
+  stop)  do_stop  ;;
+  restart) do_stop; do_start ;;
+  *) echo "Usage: $0 {start|stop|restart}" >&2; exit 1 ;;
+esac
+
+exit 0
