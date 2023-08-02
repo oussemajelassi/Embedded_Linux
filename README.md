@@ -391,6 +391,8 @@ When we want to modify a file we first look to the corresponding recipe.
 
 Our case we want to change /dev/network/interface of our target.
 
+PLease note if we are using **systemd** we should add a file in /etc/systemd/network nammed 00_eth0.network.(I will be adding an example for reference).
+
 the command is `` devtool search /etc/network/interfaces``
 
 ### Customize the configurations : 
