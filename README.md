@@ -490,12 +490,25 @@ In order to get modbus working and my sensor interfaced i should enable ~~both *
 and So we will look up to the **device tree**.
 the device tree is configured in a .dts file that can be found in `tmp/work-shared/beaglebone/kernel-source/arch/arm/boot/dts`
 Yocto is not okay with us modifying this file however we need to either create our own .dts file or create a **patch** that updates this file.
+
 I am following a tutorial where he will make a patch so i will follow him.
+
 going into `am335x-bone-common.dtsi`, I found two **&i2c** blocks, The status in each one of them show the word **okay** which means enabled.
+
 If we go through beaglebone documentation we will find that the beagle bone has only two i2c ports which are already enabled when using the core-base-image, So we have nothing big to do.
 
 The file itself is not much of informations since it has many includes : my case for example it include ``am335x-bone-common.dtsi`` which describes for example the already used i2c ports.
 
 
-All these configs are made through `` bitbake -c menuconfig <recipe-name>``.
+### ON boot Tasks : 
 
+My final application consists of a modbus slave, so I have no other option than to let my application work on boot.
+
+**Sysvinit**, which is the program responsible of on boot applications in linux looks for `/etc/init.d`.
+He then runs all the scripts. We can write a script that launches my modbus application on boot.
+
+In `Flooka-Layer/recipes-Flooka/application-start/files` : 
+I will ``touch application``
+
+and in `Flooka-Layer/recipes-Flooka/application-start/` : 
+I will ``touch application-start_1.0.bb``, In which i will add the new file to init.d. ( check uploaded files ). 
