@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 DEPENDS += "libmodbus"
 SRC_URI = "file://src"
 S = "${WORKDIR}/src"
-
 do_compile(){
 ${CC} ${CFLAGS} ${LDFLAGS} application.c -o application -I/${RECIPE_SYSROOT}/${includedir}/modbus/ -lmodbus
 
@@ -13,5 +12,9 @@ ${CC} ${CFLAGS} ${LDFLAGS} application.c -o application -I/${RECIPE_SYSROOT}/${i
 
 do_install () {
 install -d ${D}${bindir}
+install -d ${D}${sysconfdir_native}
 install -m 0755 application ${D}${bindir}
+install -m 0644 config.txt ${D}${sysconfdir_native}
 }
+
+FILES:${PN} += "${sysconfdir_native}/config.txt"

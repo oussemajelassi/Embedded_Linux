@@ -7,7 +7,6 @@
 #include <inttypes.h>
 #include <stdlib.h>
 #include <asm/ioctls.h>
-
 #define UART_PATH "/dev/ttyS0"
 
 /*
@@ -19,6 +18,45 @@
 
 //Simple function that grab temperature on my laptop and copy it to the mapping
 //structure from libmodbus ( this code is for test purpose ).
+typedef enum {
+MODBUS_Mode_RTU_en,
+MODBUS_Mode_TCP_en
+}MODBUS_Mode_en;
+
+MODBUS_Mode_en Init()
+{
+FILE* file = fopen("/etc/config.txt","r");
+char line [256];
+if ( file == NULL )
+{
+perror("Error opeenig the file");
+exit (1);
+}
+if (fgets(line, sizeof(line), file) == NULL) {
+        perror("Error reading the first line");
+        fclose(file);
+        return EXIT_FAILURE;
+    }
+
+    if (fgets(line, sizeof(line), file) == NULL) {
+        perror("Error reading the second line");
+        fclose(file);
+        return EXIT_FAILURE;
+    }
+
+if ( strstr (line,"RTU" ) )
+{
+printf("RTU Mode Selected \n");        
+return MODBUS_Mode_RTU_en;
+}
+
+else 
+{
+printf("TCP/IP Mode Selected \n");
+return MODBUS_Mode_TCP_en ;
+}
+
+}
 void update_temps(modbus_mapping_t *mb_mapping)
 {
 	FILE *f1,*f2;
@@ -40,13 +78,19 @@ void update_temps(modbus_mapping_t *mb_mapping)
 }
 
 int main(int argc, char *argv[]){
+	MODBUS_Mode_en MODBUS_CurrentMode_en = Init () ;
 	int ret,rc;
 	uint8_t *request;//Will contain internal libmodubs data from a request that must be given back to answer
 	modbus_t *ctx;
 	modbus_mapping_t *mb_mapping;
 
 	//Set uart configuration and store it into the modbus context structure
-	ctx = modbus_new_rtu(UART_PATH, 115200, 'N', 8, 1);
+	switch ( MODBUS_CurrentMode_en ) 
+	{
+	case MODBUS_Mode_RTU_en : ctx = modbus_new_rtu(UART_PATH, 115200, 'N', 8, 1);break;
+	case MODBUS_Mode_TCP_en : ctx = modbus_new_tcp("192.168.3.1",1502);break;
+	}
+	
 	if (ctx == NULL) {
 		perror("Unable to create the libmodbus context");
 		return -1;

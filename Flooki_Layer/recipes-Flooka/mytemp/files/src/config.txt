@@ -1,0 +1,2 @@
+This file Will be used in order to choose some needed parameters.
+MODE = RTU
