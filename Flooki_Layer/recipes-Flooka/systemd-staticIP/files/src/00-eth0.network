@@ -1,0 +1,7 @@
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.3.101/22
+Gateway=192.168.3.4
+DNS=8.8.8.8
