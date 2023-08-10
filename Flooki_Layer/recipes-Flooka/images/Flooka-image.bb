@@ -11,5 +11,5 @@ IMAGE_INSTALL:append = " nano"
 IMAGE_INSTALL:remove = "dropbear"
 IMAGE_INSTALL+="libmodbus"
 IMAGE_INSTALL +="application"
-IMAGE_INSTALL +="application-start"
 IMAGE_INTSALL +="staticIP"
+
