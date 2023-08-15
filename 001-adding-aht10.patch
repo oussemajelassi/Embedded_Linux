@@ -1,0 +1,18 @@
+diff --git a/src/arm/am335x-bone-common.dtsi b/src/arm/am335x-bone-common.dtsi
+index dedb90f..25369e8 100644
+--- a/src/arm/am335x-bone-common.dtsi
++++ b/src/arm/am335x-bone-common.dtsi
+@@ -234,6 +234,13 @@
+ 	status = "okay";
+ 	clock-frequency = <100000>;
+ 	symlink = "bone/i2c/2";
++	aht10@0x38 {
++	compatible = "aht10,";
++	reg = <0x38>;
++	#address-cells = <1>;
++		#size-cells = <1>;
++		};
++	
+ 
+ 	cape_eeprom0: cape_eeprom0@54 {
+ 		compatible = "atmel,24c256";
