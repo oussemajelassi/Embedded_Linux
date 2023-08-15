@@ -8,6 +8,7 @@ Starting the journey there will be a few concepts one should be aware of before 
 * https://docs.yoctoproject.org/bitbake/2.4/index.html
 * https://wiki.st.com/stm32mpu/wiki/BitBake_cheat_sheet
 * https://www.youtube.com/watch?v=9vsu67uMcko&list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB
+* https://erlerobotics.gitbooks.io/erle-robotics-erle-brain-a-linux-brain-for-drones/content/en/tutorials/i2c.html
 
   
 ## The build/compilation process : 
