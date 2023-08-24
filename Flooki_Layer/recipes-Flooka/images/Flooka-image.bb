@@ -9,7 +9,9 @@ IMAGE_FEATURES += "ssh-server-dropbear"
 IMAGE_INSTALL:append = " mc"
 IMAGE_INSTALL:append = " nano"
 IMAGE_INSTALL:remove = "dropbear"
-IMAGE_INSTALL+="libmodbus"
+
+IMAGE_INSTALL +="libmodbus"
 IMAGE_INSTALL +="application"
 IMAGE_INTSALL +="staticIP"
+
 
