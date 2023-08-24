@@ -64,7 +64,7 @@ class Ui_ModbusMASTER(object):
     
     def Get_Data_CALLBACK (self) :
         self.GET_WIN = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_MainWindow(Modbus_Slaves)
         self.ui.setupUi(self.GET_WIN)
         self.ui.Insert_Items(Modbus_Slaves)
         self.GET_WIN.show() 
