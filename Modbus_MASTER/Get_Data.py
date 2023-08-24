@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import subprocess
+import re
 Items_Array = []
 
 
@@ -69,18 +70,29 @@ class Ui_MainWindow(object):
             
 
     def Get_Data_Callback(self  ) :
-        print("Selected items: ", self.listWidget.selectedItems()[0].text())
-        print(self.MODBUS_Slaves)
-        print(type(self.MODBUS_Slaves))
         for Slave in (self.MODBUS_Slaves) : 
             if str(Slave.Name) in str(self.listWidget.selectedItems()[0].text()) : 
-                print (Slave.Ip)
-                print (Slave.Port)
 
-                result = subprocess.check_output(["mbpoll -p "+str(Slave.Port)+" -c 2 -1 "+str(Slave.Ip)], shell=True)
-                print (result)
 
+                result = str (subprocess.check_output(["mbpoll -p "+str(Slave.Port)+" -c 2 -1 "+str(Slave.Ip)], shell=True))
                 
+                result = str(result[result.find("Polling slave 1...")+len("Polling slave 1..."):])
+                result = re.sub('\s+', '',result)
+                
+                
+
+               
+
+                result = result [result.find("[1]:") + len("[1]:") : result.find("[2]:") + len("[2]:") + 4  ]
+
+
+                data_1 = result[2:result.find("[2]:")-2]
+                data_2 = result[result.find("[2]:") + len("[2]:") + 2: result.find("[2]:") + len("[2]:") + 3]
+                print(data_1)
+
+
+
+
 
         
         
