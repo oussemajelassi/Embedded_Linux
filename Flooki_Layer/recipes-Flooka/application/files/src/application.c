@@ -64,14 +64,14 @@ void update_temps(modbus_mapping_t *mb_mapping)
 	uint32_t t1,t2;
 	size_t s;
 
-	//f1 = fopen("/sys/class/thermal/thermal_zone0/temp","r");
-	//fscanf(f1,"%"PRIu32,&t1);
-	t1 = 2000/1000;
+	f1 = fopen("/sys/bus/i2c/drivers/aht10/2-0038/hwmon/hwmon0/temp1_input","r");
+	fscanf(f1,"%"PRIu32,&t1);
+
 	mb_mapping->tab_registers[0] =(uint16_t) t1;
 
-	//f2 = fopen("/sys/class/thermal/thermal_zone1/temp","r");
-	//fscanf(f2,"%"PRIu32,&t2);
-	t2 = 3000/1000;
+	f2 = fopen("/sys/bus/i2c/drivers/aht10/2-0038/hwmon/hwmon0/temp1_input","r");
+	fscanf(f2,"%"PRIu32,&t2);
+
 	mb_mapping->tab_registers[1] =(uint16_t) t2;
 
 	//fclose(f1);
