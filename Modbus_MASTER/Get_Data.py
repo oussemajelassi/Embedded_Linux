@@ -9,14 +9,18 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-Items_Array = ["temp","ouss"]
+import subprocess
+Items_Array = []
 
 
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def __init__(self , MODBUS_Slaves) -> None:
+        self.MODBUS_Slaves = MODBUS_Slaves
+    
+    def setupUi(self, MainWindow ):
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(461, 308)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -64,8 +68,20 @@ class Ui_MainWindow(object):
 
             
 
-    def Get_Data_Callback(self) :
+    def Get_Data_Callback(self  ) :
         print("Selected items: ", self.listWidget.selectedItems()[0].text())
+        print(self.MODBUS_Slaves)
+        print(type(self.MODBUS_Slaves))
+        for Slave in (self.MODBUS_Slaves) : 
+            if str(Slave.Name) in str(self.listWidget.selectedItems()[0].text()) : 
+                print (Slave.Ip)
+                print (Slave.Port)
+
+                result = subprocess.check_output(["mbpoll -p "+str(Slave.Port)+" -c 2 -1 "+str(Slave.Ip)], shell=True)
+                print (result)
+
+                
+
         
         
 
@@ -76,7 +92,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_MainWindow(Items_Array)
     ui.setupUi(MainWindow)
     ui.Insert_Items(Items_Array)
     MainWindow.show()
